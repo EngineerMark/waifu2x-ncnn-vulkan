@@ -1,3 +1,8 @@
+# Fork
+
+The reason for this Fork is to modify the code to give the user more freedom.
+Originally, the tool only allows 2x scaling. Stuff like this shouldn't be limited in my opinion (except for crazy large numbers like x1000 etc).
+
 # waifu2x ncnn Vulkan
 
 ![CI](https://github.com/nihui/waifu2x-ncnn-vulkan/workflows/CI/badge.svg)
