@@ -689,7 +689,7 @@ int main(int argc, char** argv)
         {
             prepadding = 18;
         }else{
-            prepadding = 10;
+            prepadding = 10; // No clue what this does, will play with if it messes stuff up
         }
     }
     else if (model.find(PATHSTR("models-upconv_7_anime_style_art_rgb")) != path_t::npos)
@@ -711,8 +711,8 @@ int main(int argc, char** argv)
     wchar_t modelpath[256];
     if (noise == -1)
     {
-        swprintf(parampath, 256, L"%s/scale2.0x_model.param", model.c_str());
-        swprintf(modelpath, 256, L"%s/scale2.0x_model.bin", model.c_str());
+        swprintf(parampath, 256, L"%s/scale%d.0x_model.param", model.c_str(), scale);
+        swprintf(modelpath, 256, L"%s/scale%d.0x_model.bin", model.c_str(), scale);
     }
     else if (scale == 1)
     {
@@ -721,16 +721,16 @@ int main(int argc, char** argv)
     }
     else
     {
-        swprintf(parampath, 256, L"%s/noise%d_scale2.0x_model.param", model.c_str(), noise);
-        swprintf(modelpath, 256, L"%s/noise%d_scale2.0x_model.bin", model.c_str(), noise);
+        swprintf(parampath, 256, L"%s/noise%d_scale%d.0x_model.param", model.c_str(), noise, scale);
+        swprintf(modelpath, 256, L"%s/noise%d_scale%d.0x_model.bin", model.c_str(), noise, scale);
     }
 #else
     char parampath[256];
     char modelpath[256];
     if (noise == -1)
     {
-        sprintf(parampath, "%s/scale2.0x_model.param", model.c_str());
-        sprintf(modelpath, "%s/scale2.0x_model.bin", model.c_str());
+        sprintf(parampath, "%s/scale%d.0x_model.param", model.c_str(), scale);
+        sprintf(modelpath, "%s/scale%d.0x_model.bin", model.c_str(), scale);
     }
     else if (scale == 1)
     {
@@ -739,8 +739,8 @@ int main(int argc, char** argv)
     }
     else
     {
-        sprintf(parampath, "%s/noise%d_scale2.0x_model.param", model.c_str(), noise);
-        sprintf(modelpath, "%s/noise%d_scale2.0x_model.bin", model.c_str(), noise);
+        sprintf(parampath, "%s/noise%d_scale%d.0x_model.param", model.c_str(), noise, scale);
+        sprintf(modelpath, "%s/noise%d_scale%d.0x_model.bin", model.c_str(), noise, scale);
     }
 #endif
 
