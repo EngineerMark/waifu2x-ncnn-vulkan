@@ -106,7 +106,7 @@ static void print_usage()
     fprintf(stderr, "  -i input-path        input image path (jpg/png/webp) or directory\n");
     fprintf(stderr, "  -o output-path       output image path (jpg/png/webp) or directory\n");
     fprintf(stderr, "  -n noise-level       denoise level (-1/0/1/2/3, default=0)\n");
-    fprintf(stderr, "  -s scale             upscale ratio (1/2, default=2)\n");
+    fprintf(stderr, "  -s scale             upscale ratio (1-64, default=2)\n");
     fprintf(stderr, "  -t tile-size         tile size (>=32/0=auto, default=0) can be 0,0,0 for multi-gpu\n");
     fprintf(stderr, "  -m model-path        waifu2x model path (default=models-cunet)\n");
     fprintf(stderr, "  -g gpu-id            gpu device to use (default=auto) can be 0,1,2 for multi-gpu\n");
@@ -545,7 +545,7 @@ int main(int argc, char** argv)
         return -1;
     }
 
-    if (scale < 1 || scale > 2)
+    if (scale < 1 || scale > 64)
     {
         fprintf(stderr, "invalid scale argument\n");
         return -1;
@@ -688,6 +688,8 @@ int main(int argc, char** argv)
         else if (scale == 2)
         {
             prepadding = 18;
+        }else{
+            prepadding = 10;
         }
     }
     else if (model.find(PATHSTR("models-upconv_7_anime_style_art_rgb")) != path_t::npos)
@@ -717,7 +719,7 @@ int main(int argc, char** argv)
         swprintf(parampath, 256, L"%s/noise%d_model.param", model.c_str(), noise);
         swprintf(modelpath, 256, L"%s/noise%d_model.bin", model.c_str(), noise);
     }
-    else if (scale == 2)
+    else
     {
         swprintf(parampath, 256, L"%s/noise%d_scale2.0x_model.param", model.c_str(), noise);
         swprintf(modelpath, 256, L"%s/noise%d_scale2.0x_model.bin", model.c_str(), noise);
@@ -735,7 +737,7 @@ int main(int argc, char** argv)
         sprintf(parampath, "%s/noise%d_model.param", model.c_str(), noise);
         sprintf(modelpath, "%s/noise%d_model.bin", model.c_str(), noise);
     }
-    else if (scale == 2)
+    else
     {
         sprintf(parampath, "%s/noise%d_scale2.0x_model.param", model.c_str(), noise);
         sprintf(modelpath, "%s/noise%d_scale2.0x_model.bin", model.c_str(), noise);
