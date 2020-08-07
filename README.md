@@ -91,6 +91,8 @@ cmake ../src
 cmake --build . -j 4
 ```
 
+-- I included a batch file which does the cmake process automatically for you.
+
 ## Speed Comparison with waifu2x-caffe-cui
 
 ### Environment
